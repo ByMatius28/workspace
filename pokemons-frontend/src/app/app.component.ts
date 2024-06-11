@@ -1,19 +1,19 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzLayoutModule } from 'ng-zorro-antd/layout';
-import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { HttpClientModule } from '@angular/common/http';
-
-
+import { PokemonService} from './services/pokemon.service'
+import { Component, OnInit } from '@angular/core';
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [CommonModule, RouterOutlet, NzIconModule, NzLayoutModule, NzMenuModule, HttpClientModule],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+   selector: 'app-root',
+   templateUrl: './app.component.html',
+   styleUrls: ['./app.component.css'],
+   providers: [PokemonService],
 })
-export class AppComponent {
-  isCollapsed = false;
-}
+export class AppComponent implements OnInit{
+  poke: any;
+  url = 'https://pokeapi.co/api/v2/pokemon/growlithe/'
+  constructor(private srv: PokemonService){}
+  getPoke():void{
+     this.srv.getData(this.url).subscribe(data=>this.poke=data)
+  }
+  ngOnInit(){
+  this.getPoke()
+  }
+  }

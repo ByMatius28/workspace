@@ -1,0 +1,26 @@
+<div class="container">
+    <nz-card>
+      <h2>Pokémon Generator</h2>
+      <div nz-row>
+        <div nz-col nzSpan="18">
+          <nz-input-group nzSearch>
+            <input type="text" nz-input placeholder="Enter Pokémon Name or ID" #pokemonInput>
+          </nz-input-group>
+        </div>
+        <div nz-col nzSpan="6">
+          <button nz-button nzType="primary" (click)="fetchPokemon(pokemonInput.value)">Generate Pokémon</button>
+        </div>
+      </div>
+      <nz-spin [nzSpinning]="loading">
+        <div *ngIf="pokemonData">
+          <h3>{{pokemonData.name | titlecase}}</h3>
+          <img [src]="pokemonData.sprites.front_default" [alt]="pokemonData.name">
+          <p><strong>ID:</strong> {{pokemonData.id}}</p>
+        </div>
+        <div *ngIf="error" style="color: red;">
+          <p>Error: {{error}}</p>
+        </div>
+      </nz-spin>
+    </nz-card>
+  </div>
+  
