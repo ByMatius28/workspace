@@ -6,6 +6,11 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 export class ComboService {
   constructor(private prisma: PrismaService) {}
+  
+  createCombo(comboData: any): any {
+    // Aquí iría la lógica para crear un combo en la base de datos
+    return { message: 'Combo creado exitosamente', data: comboData };
+}
 
   create(createComboDto: CreateComboDto) {
     return this.prisma.combo.create({ data: createComboDto});
