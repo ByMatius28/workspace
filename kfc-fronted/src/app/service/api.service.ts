@@ -1,19 +1,20 @@
-import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
-@Injectable(
-  {
-    providedIn: 'root'
-  })
-  export class ApiService {
+@Injectable({
+  providedIn: 'root',
+})
+export class ApiService {
   private apiUrl = 'http://localhost:3000';
 
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  createCombo(comboData: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/combos`, comboData);
+  createCombo<T>(comboData: T): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/combo`, comboData);
   }
 
+  getCombos(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/combo`);
+  }
 }
