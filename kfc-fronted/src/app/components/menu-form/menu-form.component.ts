@@ -12,6 +12,7 @@ import { NzInputNumberComponent } from 'ng-zorro-antd/input-number';
 import { Validators as MyValidators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../service/api.service';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-menu-form',
@@ -25,13 +26,19 @@ import { ApiService } from '../../service/api.service';
     NzButtonComponent,
     NzInputNumberComponent,
     CommonModule,
+    NgFor
   ],
   templateUrl: './menu-form.component.html',
   styleUrl: './menu-form.component.css',
 })
-export class MenuFormComponent implements OnInit {
-  selectedBeanFlavor: any;
-
+export class MenuFormComponent implements OnInit{
+combos:any
+getCombos() {
+this.apiService.getCombos().subscribe((data)=> {
+    this.combos = data
+    console.log(this.combos)
+  });
+}
   validateForm: FormGroup<{
     name: FormControl<string>;
     description: FormControl<string>;
@@ -52,7 +59,9 @@ export class MenuFormComponent implements OnInit {
       price: [0, [required]],
     });
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.getCombos()
+  }
 
   submitMenuForm(): void {
     if (this.validateForm.valid) {
@@ -60,7 +69,7 @@ export class MenuFormComponent implements OnInit {
         this.createNotification(
           'success',
           `${this.validateForm.value.name} ${this.validateForm.value.description}`,
-          'The Bean Flavor has been created successfully!'
+          'Tu combo ha sido creado con exito!'
         );
         this.validateForm.reset();
       });

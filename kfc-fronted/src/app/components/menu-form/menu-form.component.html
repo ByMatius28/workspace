@@ -38,3 +38,30 @@
     </nz-form-control>
   </nz-form-item>
 </form>
+
+<table border="1" cellpadding="10" cellspacing="0">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Description</th>
+      <th>Items</th>
+      <th>price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let combo of combos">
+      <td>{{ combo.id }}</td>
+      <td>{{ combo.name }}</td>
+      <td>{{ combo.description }}</td>
+      <td>{{ combo.items }}</td>
+      <td>{{ combo.price }}</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+  
+
+
